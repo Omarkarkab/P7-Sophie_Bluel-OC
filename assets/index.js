@@ -1,15 +1,18 @@
+// Fonction asynchrone pour récupérer les projets depuis l'API
 async function getProjects() {
     const response = await fetch("http://localhost:5678/api/works")
     const projects = await response.json()
     return projects
 }
 
+// Fonction asynchrone pour récupérer les catégories depuis l'API
 async function getCategories() {
     const response = await fetch("http://localhost:5678/api/categories")
     const categories = await response.json()
     return categories
 }
 
+// Fonction asynchrone pour afficher les projets filtrés
 async function displayProjects(filterCategory = -1) {
     const projects = await getProjects()
     const gallery = document.querySelector('.gallery')
@@ -28,6 +31,7 @@ async function displayProjects(filterCategory = -1) {
     })
 }
 
+// Fonction pour créer un bouton de filtre pour une catégorie donnée
 function createFilterButton(category) {
     const button = document.createElement('button')
     button.textContent = category.name
@@ -44,6 +48,7 @@ function createFilterButton(category) {
     return button
 }
 
+// Fonction asynchrone pour afficher les boutons de filtres
 async function displayFilters() {
     const categories = await getCategories()
     categories.unshift({ "id": -1, "name": "Tous" })
@@ -54,15 +59,6 @@ async function displayFilters() {
     })
 }
 
+// Affiche initialement les filtres et les projets
 displayFilters()
 displayProjects()
-
-
-
-
-
-
-
-
-
-
